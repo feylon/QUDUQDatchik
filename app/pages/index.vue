@@ -197,7 +197,8 @@ const items = ref([
       label: "Qurilma haqida ma'lumot",
       icon: 'i-lucide-info',
       onSelect() {
-        console.log("Info bosildi")
+        console.log("Info bosildi");
+        navigateTo("/info/1")
       }
     },
     {
