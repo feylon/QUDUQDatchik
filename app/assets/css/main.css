@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+/* https://fonts.nuxt.com/get-started/installation */
+font-awesome-icon {
+    height: 20px;
+}
