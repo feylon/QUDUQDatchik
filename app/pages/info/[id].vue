@@ -6,7 +6,12 @@
 
     <div class="mt-6">
         <div class="mx-auto" id="map" style="width: 100%; height: 400px;"></div>
-
+<LineChart
+    :labels="['Yan', 'Fev', 'Mart', 'Apr']"
+    :data="[12, 19, 3, 5]"
+    color="red"
+    class="h-[300px]"
+  />
 
     </div>
 </template>
