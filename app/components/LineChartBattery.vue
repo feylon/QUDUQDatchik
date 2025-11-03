@@ -10,7 +10,7 @@ import { ref, onMounted } from "vue"
 const canvas = ref<HTMLCanvasElement | null>(null)
 
 const props = defineProps<{
-  monthlyData: { day: number; level: number }[]
+  hourlyData: { hour: string; percent: number }[]
   color?: string
 }>()
 
@@ -20,16 +20,18 @@ onMounted(() => {
   new $chart(canvas.value!, {
     type: "line",
     data: {
-      labels: props.monthlyData.map(d => `${d.day} kun`),
+      labels: props.hourlyData.map(d => d.hour),
       datasets: [
         {
-          label: "Suv balandligi (sm)",
-          data: props.monthlyData.map(d => d.level),
-          borderColor: props.color || "rgba(54, 162, 235, 1)",
-          backgroundColor: "rgba(54, 162, 235, 0.25)",
+          label: "Batareya (%)",
+          data: props.hourlyData.map(d => d.percent),
+          borderColor: props.color || "rgba(0, 200, 0, 1)",
+          backgroundColor: "rgba(0, 200, 0, 0.25)",
           borderWidth: 2,
           tension: 0.4,
-          fill: true
+          fill: true,
+          pointRadius: 4,
+          pointHoverRadius: 6
         }
       ]
     },
@@ -38,16 +40,17 @@ onMounted(() => {
       maintainAspectRatio: false,
       scales: {
         y: {
+          min: 0,
+          max: 100,
           title: {
             display: true,
-            text: "Suv balandligi (sm)"
-          },
-          beginAtZero: false
+            text: "Batareya (%)"
+          }
         },
         x: {
           title: {
             display: true,
-            text: "Kun"
+            text: "Soat"
           }
         }
       }

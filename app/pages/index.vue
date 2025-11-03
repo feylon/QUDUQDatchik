@@ -13,7 +13,7 @@
 
 
   <div class="flex items-center mt-3 gap-3 flex-col">
-    <div v-for="value in FakeDataArray" :key="value.id" class="relative mb-4 w-full max-w-[700px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md
+    <div @dblclick="navigateTo('/info/1')" v-for="value in FakeDataArray" :key="value.id" class="relative mb-4 w-full max-w-[700px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md
           border border-white/20 flex flex-col gap-4" :class="[StatusWell(value.status)]">
       <!-- Header -->
       <div class="flex justify-between items-start">
