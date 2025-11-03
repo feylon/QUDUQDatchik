@@ -60,7 +60,9 @@
   </div>
 
 
-  <div class="w-[50px] h-[50px] flex items-center justify-center rounded-full fixed right-5 bg-blue-600 bottom-5">
+  <div
+  @click="navigateTo('/superadmin/adddevice')"
+   class="w-[50px] h-[50px] flex items-center justify-center rounded-full fixed right-5 bg-blue-600 bottom-5">
     <font-awesome-icon class="h-[15px] text-white" icon="fa-solid fa-plus" />
   </div>
 

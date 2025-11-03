@@ -80,7 +80,7 @@ const menus = computed<{
     },
     {
         id: "4",
-        to: '/map',
+        to: '/superadmin/users',
         title: "Foydalanuvchilar",
         icon: "fa-solid fa-users"
 
