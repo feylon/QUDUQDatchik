@@ -12,8 +12,8 @@
 
 
 
-  <div class="flex items-center mt-3 gap-3 flex-col">
-    <div @dblclick="navigateTo('/info/1')" v-for="value in FakeDataArray" :key="value.id" class="relative mb-4 w-full max-w-[700px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md
+  <div class="flex items-center mt-3 gap-3 flex-wrap justify-center">
+    <div @dblclick="navigateTo('/info/1')" v-for="value in FakeDataArray" :key="value.id" class="relative mb-4 w-full max-w-[400px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md
           border border-white/20 flex flex-col gap-4" :class="[StatusWell(value.status)]">
       <!-- Header -->
       <div class="flex justify-between items-start">
@@ -53,10 +53,12 @@
         </div>
       </div>
     </div>
-    <UPagination v-model:page="page" :total="total" class="mb-5" color="secondary" active-color="secondary" />
 
 
 
+  </div>
+  <div class="mb-5 justify-center flex pb-4">
+    <UPagination v-model:page="page" :total="total" class="mb-5 mx-auto block mt-7" color="secondary" active-color="secondary" />
   </div>
 
 

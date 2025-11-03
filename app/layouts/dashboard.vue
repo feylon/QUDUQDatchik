@@ -13,8 +13,10 @@
             </div>
         </nav>
 
-        <div class="h-full overflow-y-auto ps-4 pe-4 pb-4 w-full max-w-full">
+        <div class="h-full flex flex-col overflow-y-auto ps-4 pe-4 pb-4 mb-2 w-full max-w-full">
             <slot />
+            <div class="min-h-20">
+            </div>
         </div>
 
 
