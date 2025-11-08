@@ -3,7 +3,25 @@
     <font-awesome-icon @click="router.go(-1)" icon="fa-solid fa-arrow-left" class="h-6" />
     Foydalanuvchilar
   </div>
-
+  <div  class="ms-3 mb-6 overflow-x-scroll pt-5 min-h-[40px] items-end  flex  mt-9 min-w-[50%]">
+   <UBreadcrumb :items="parent" />
+   <nav class="text-sm text-gray-600 hidden" aria-label="Breadcrumb">
+    <ol class="list-reset flex">
+      <li v-for="(item, index) in parent" :key="index" class="flex items-center">
+        <NuxtLink
+          v-if="index !== parent.length - 1"
+          :to="item.to"
+          class="text-gray-500 hover:text-gray-700"
+        >
+          {{ item.label }}
+        </NuxtLink>
+        <span v-else class="text-gray-700">{{ item.label }}</span>
+        
+        <span v-if="index !== parent.length - 1" class="mx-2">/</span>
+      </li>
+    </ol>
+  </nav>
+   </div>
 
   <div class="w-full mt-3 flex items-center justify-center gap-4">
     <UInput icon="i-lucide-search" size="lg" class="max-w-[600px] w-full" variant="outline" color="secondary"
@@ -17,7 +35,7 @@
 
 
     <div v-for="(value, index) in users"
-      class="block p-4 relative min-w-sm me-3 pt-4 max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      class="block p-4 justify-center relative min-w-sm me-3 pt-4 max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
       <div class="flex mt-6 justify-between">
         <h5 class="mb-2  text-[18px] font-bold tracking-tight text-gray-900 dark:text-white">F.I.O</h5>
@@ -167,4 +185,31 @@ const users: {
   }
 ])
 
+
+
+const parent = ref([
+  {
+    label: 'Mamadaliev Akmal Odilovich',
+    
+    to: '/superadmin/users/'
+  },
+    {
+    label: 'Mamadaliev Akmal Odilovich',
+    
+    to: '/superadmin/users/'
+  },
+  {
+    label: 'Mamadaliev Akmal Odilovich',
+    
+    to: '/superadmin/users/'
+  },
+    {
+    label: 'Mamadaliev Akmal Odilovich',
+    
+    to: '/superadmin/users/'
+  },
+
+  
+  
+])
 </script>
