@@ -12,8 +12,8 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: false },
   css: ['./app/assets/css/main.css',
- ],
- ssr : false,
+  ],
+  ssr: false,
   runtimeConfig: {
     // Private keys are only available on the server
     apiSecret: '123',
@@ -21,6 +21,8 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       apiBase: process.env.YANDEX_API || '/api',
+      apiUrl: process.env.URl || 'ErrorAPi',
+      YANDEXAPI: process.env.YANDEXAPI || 'errorYAndexApi'
     },
   },
   vite: {
@@ -28,8 +30,8 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  ui : {
-      colorMode: false
+  ui: {
+    colorMode: false
 
   }
 })

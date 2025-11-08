@@ -53,7 +53,25 @@ onMounted(async () => {
           Ma'lumot
         </button>
 
+
+
+        
       </div>
+
+        <div class="flex gap-4  mt-2 w-full flex-col">
+        <button id="infoBtn" class="bg-blue-600 cursor-pointer hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Balandlik 
+        </button>
+
+           <button id="infoBtn" class="bg-blue-600 cursor-pointer hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Tempratura C 
+        </button>
+
+
+           <button id="infoBtn" class="bg-blue-600 cursor-pointer hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+          Akkulmuyator
+        </button>
+    </div>
     </div>
   `, {
     build: function () {

@@ -5,28 +5,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
+import { ref, watch, onMounted } from "vue"
 
 const canvas = ref<HTMLCanvasElement | null>(null)
+const chart = ref<any>(null)
 
 const props = defineProps<{
   monthlyData: { day: number; level: number }[]
+  label?: string
   color?: string
+  backgroundColor?: string
+  yText?: string
+  xText?: string
 }>()
 
-onMounted(() => {
-  const { $chart } = useNuxtApp()
+const { $chart } = useNuxtApp()
 
-  new $chart(canvas.value!, {
+const createChart = () => {
+  if (!canvas.value) return
+
+  // Eski chart bo‘lsa – o‘chiramiz
+  if (chart.value) {
+    chart.value.destroy()
+  }
+
+  chart.value = new $chart(canvas.value, {
     type: "line",
     data: {
-      labels: props.monthlyData.map(d => `${d.day} kun`),
+      labels: props.monthlyData.map(d => `${d.day} `),
       datasets: [
         {
-          label: "Suv balandligi (sm)",
+          label: props.label || "Suv balandligi (sm)",
           data: props.monthlyData.map(d => d.level),
           borderColor: props.color || "rgba(54, 162, 235, 1)",
-          backgroundColor: "rgba(54, 162, 235, 0.25)",
+          backgroundColor: props.backgroundColor || "rgba(54, 162, 235, 0.25)",
           borderWidth: 2,
           tension: 0.4,
           fill: true
@@ -40,25 +52,27 @@ onMounted(() => {
         y: {
           title: {
             display: true,
-            text: "Suv balandligi (sm)"
-          },
-          beginAtZero: false
+            text: props.yText || "Suv balandligi (sm)"
+          }
         },
         x: {
           title: {
             display: true,
-            text: "Kun"
+            text: props.xText || "Kun"
           }
         }
       }
     }
   })
-})
-</script>
-
-<style scoped>
-canvas {
-  width: 100% !important;
-  height: 100% !important;
 }
-</style>
+
+onMounted(() => {
+  createChart()
+})
+
+// ✅ Props o‘zgarsa grafik avtomatik yangilanadi
+watch(props, () => {
+  createChart()
+}, { deep: true })
+
+</script>

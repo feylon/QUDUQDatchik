@@ -5,8 +5,11 @@ export default defineNuxtPlugin(() => {
   return {
     provide: {
       loadYandex: () => {
+        const config = useRuntimeConfig();
+        const { YANDEXAPI } = config.public;
+        
         return ymaps.load(
-          "https://api-maps.yandex.ru/2.1/?apikey=b8f63ef0-13fd-481b-ab33-44f60840da9d&lang=ru_RU"
+          `https://api-maps.yandex.ru/2.1/?apikey=${YANDEXAPI}&lang=ru_RU`
         );
       },
     },

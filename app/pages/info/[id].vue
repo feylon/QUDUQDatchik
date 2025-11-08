@@ -7,10 +7,9 @@
 
     <UButton
       @click="modalDrawer = true"
-      label="Open"
+      label="Loglar"
       color="neutral"
       variant="subtle"
-      trailing-icon="i-lucide-chevron-up"
     />
   </span>
 
