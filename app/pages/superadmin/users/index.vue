@@ -45,7 +45,7 @@
         class="absolute cursor-pointer right-13 top-1">
         <font-awesome-icon icon="fa-solid fa-list-check" class="h-[17px]" />
       </UButton>
-      <UButton icon="i-lucide-pen" size="md" color="neutral" class="absolute cursor-pointer right-2 top-1" />
+      <UButton @click="navigateTo(`/superadmin/users/edit/${index}`)" icon="i-lucide-pen" size="md" color="neutral" class="absolute cursor-pointer right-2 top-1" />
 
     </div>
 
@@ -56,7 +56,7 @@
 
 
 
-  <div @click="navigateTo('/superadmin/adddevice')"
+  <div @click="navigateTo('/superadmin/users/adduser')"
     class="w-[50px] h-[50px] flex items-center justify-center rounded-full fixed right-5 bg-blue-600 bottom-5">
     <font-awesome-icon class="h-[15px] text-white" icon="fa-solid fa-plus" />
   </div>
@@ -88,20 +88,17 @@
 
 
 
-          <div class="flex text-black mt-4 justify-between">
-            <span class="font-bold">Lavozimi</span>
-            <span>Admin</span>
-          </div>
+      
 
           <hr class="mt-5">
 
           <div class="flex text-black mt-4 justify-between">
             <span class="font-bold">Admin</span>
-
-
-
             
           </div>
+<hr class="mt-5 mb-5">
+
+              <UStepper orientation="vertical" :items="items" color="secondary" class="w-full" />
 
         </div>
       </div>
@@ -109,6 +106,8 @@
   </UDrawer>
 </template>
 <script lang="ts" setup>
+import type { StepperItem } from '@nuxt/ui';
+
 definePageMeta({
   layout: "dashboard"
 });
@@ -140,6 +139,26 @@ const users: {
     { fio: "Rasulov Sherzod Alisherovich", lavozim: "admin", phone: "+998 93 612 44 99" },
     { fio: "Mamadaliev Akmal Odilovich", lavozim: "tuman", phone: "+998 91 555 12 33" },
     { fio: "G‘aniyeva Muhayyo Sobir qizi", lavozim: "oddiy", phone: "+998 99 301 88 55" }
-  ]
+  ];
+
+
+
+  const items = ref<StepperItem[]>([
+  {
+    title: 'Nurmurodov Azizbek Sheraliyevich',
+    description: 'Foydalanuvchi',
+    icon: 'material-symbols:perm-contact-calendar-sharp'
+  },
+  {
+    title: 'Mamadaliev Akmal Odilovich',
+    description: 'Foydalanuvchi',
+    icon: 'material-symbols:perm-contact-calendar-sharp'
+  },
+  {
+    title: 'Abdullayev Zafar Fayzullayevich',
+    description: 'Foydalanuvchi',
+    icon : 'material-symbols:perm-contact-calendar-sharp'
+  }
+])
 
 </script>
