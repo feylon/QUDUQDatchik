@@ -17,7 +17,7 @@
 
 
     <div v-for="(value, index) in users"
-      class="block p-4 relative min-w-sm pt-4 max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      class="block p-4 relative min-w-sm me-3 pt-4 max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
       <div class="flex mt-6 justify-between">
         <h5 class="mb-2  text-[18px] font-bold tracking-tight text-gray-900 dark:text-white">F.I.O</h5>
@@ -92,7 +92,7 @@
 
           <hr class="mt-5">
 
-          <div class="flex text-black mt-4 justify-between">
+          <div class="flex text-black mt-4 hidden justify-between">
             <span class="font-bold">Admin</span>
             
           </div>
