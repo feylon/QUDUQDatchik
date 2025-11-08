@@ -87,6 +87,7 @@ const togglePasswordVisibility = () => {
 }
 
 const handleSubmit = async () => {
+    return  navigateTo('/');
     // Handle form submission
     console.log('Form submitted', {
         email: email.value,

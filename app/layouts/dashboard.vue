@@ -67,16 +67,16 @@ const menus = computed<{
         title: "Qurilma",
         icon: 'fa-solid fa-house'
     },
-    {
-        id: "2",
-        to: '/map',
-        title: "MSR ro'yxati",
-        icon: "fa-solid fa-list"
-    },
+    // {
+    //     id: "2",
+    //     to: '/map',
+    //     title: "MSR ro'yxati",
+    //     icon: "fa-solid fa-list"
+    // },
     {
         id: "3",
-        to: '/map',
-        title: "Ro'yxat",
+        to: '/superadmin/actions',
+        title: "Harakatlar tarixi",
         icon: "fa-solid fa-list"
 
     },
@@ -87,15 +87,15 @@ const menus = computed<{
         icon: "fa-solid fa-users"
 
     },
-    {
-        id: "5",
-        to: '/map',
-        title: "Qurilma foydalanuvchilari",
-        icon: "fa-solid fa-bridge-water"
-    },
+    // {
+    //     id: "5",
+    //     to: '/map',
+    //     title: "Qurilma foydalanuvchilari",
+    //     icon: "fa-solid fa-bridge-water"
+    // },
     {
         id: "6",
-        to: '/map',
+        to: '/profile',
         title: "Profil",
         icon: 'fa-solid fa-address-card'
     },
