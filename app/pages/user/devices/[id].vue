@@ -1,7 +1,9 @@
 <template>
   <div class="text-black">
-    <span class="text-[25px] font-bold"> Mavjud qurilmalar</span>
-
+    <div class="flex items-center gap-2">
+      <font-awesome-icon @click="router.go(-1)" icon="fa-solid fa-arrow-left" class="h-6" />
+      Abdullayev Jasurga tegishli qurilmalar ro'yxati
+    </div>
     <div class="w-full mt-4 mb-4">
       <YandexPicker :points="devicePoints" @change="handleSelect" @action="handleBalloon" />
 
@@ -29,21 +31,14 @@
           </div>
 
           <div class="flex items-center gap-4 me-12">
-<Icon 
-  class="text-white text-[20px]"
-  :name="
-    value.waterLevel == 'rise'
-      ? 'material-symbols:arrow-shape-up-rounded'
-      : value.waterLevel == 'fall'
-      ? 'material-symbols:arrow-downward-rounded'
-      : value.waterLevel == 'stable'
-      ? 'material-symbols:chips-outline'
-      : ''
-  "
-  width="24"
-  height="24"
-/>
-
+            <Icon class="text-white text-[20px]" :name="value.waterLevel == 'rise'
+                ? 'material-symbols:arrow-shape-up-rounded'
+                : value.waterLevel == 'fall'
+                  ? 'material-symbols:arrow-downward-rounded'
+                  : value.waterLevel == 'stable'
+                    ? 'material-symbols:chips-outline'
+                    : ''
+              " width="24" height="24" />
             <Signal :signal="value.SignalType" :value="value.signal" />
 
             <charger :is-charger="value.IsCharger" :value="value.BatteryValue" />
@@ -73,8 +68,6 @@
             <span class="font-bold">Joriy balandlik</span>
             <span>{{ value.lastheight }} MM</span>
           </div>
-
-          
         </div>
       </div>
 
@@ -104,7 +97,7 @@ import { select } from "#build/ui";
 import type { deviceType } from "~/types/types";
 const { $loadYandex } = useNuxtApp();
 definePageMeta({
-  layout: "userdashboard"
+  layout: "dashboard"
 });
 
 
@@ -127,7 +120,7 @@ const router = useRouter();
 
 const searchValue = ref<string>('')
 const page = ref(Number(route.query.page) || 1)
-const total = ref(100);
+const total = ref(30);
 
 const query = computed(() => `devices?page=${page.value}` + (searchValue.value ? `&search=${encodeURIComponent(searchValue.value)}` : ''));
 const { data, pending, error, status, refresh } = useApi(query.value);
@@ -207,7 +200,14 @@ const items =
           navigateTo("/info/1")
         }
       },
-      
+      {
+        label: "O'chirish",
+        icon: 'i-lucide-trash',
+        color: 'error',
+        onSelect() {
+          console.log("O'chirish bosildi")
+        }
+      }
     ]
   ])
 
@@ -273,7 +273,7 @@ watch(data, (newVal) => {
           icon: 'i-lucide-info',
           onSelect() {
             console.log("Balandlik bosildi", el.id);
-            navigateTo(`/user/balandlik/${el.id}`)
+            navigateTo(`/balandlik/${el.id}`)
           }
         },
 
@@ -283,7 +283,7 @@ watch(data, (newVal) => {
           icon: 'material-symbols:thermometer',
           onSelect() {
             console.log("Temperatura bosildi", el.id);
-            navigateTo(`/user/tempratura/${el.id}`)
+            navigateTo(`/tempratura/${el.id}`)
           }
         },
         {
@@ -291,10 +291,17 @@ watch(data, (newVal) => {
           icon: 'material-symbols:battery-alert',
           onSelect() {
             console.log("Akkulmuyator bosildi", el.id);
-            navigateTo(`/user/battery/${el.id}`)
+            navigateTo(`/battery/${el.id}`)
           }
         },
-        
+        {
+          label: "O'chirish",
+          icon: 'i-lucide-trash',
+          color: 'error',
+          onSelect() {
+            console.log("O'chirish bosildi", el.id)
+          }
+        }
       ]
     ])
     devices.value.push(el);
@@ -337,23 +344,15 @@ function handleSelect(coords: any) {
   console.log("Bosilgan joy:", coords);
 }
 
-// ✅ Masalan backenddan 3 sekundda yangilanadi
-// setInterval(() => {
-//   devicePoints.value = [
-//     { id: 1, lat: 39.6714 + Math.random() / 100, lon: 67.0025 },
-//     { id: 2, lat: 39.6800, lon: 67.0100 + Math.random() / 100 },
-//     { id: 3, lat: 39.6600, lon: 67.0200 }
-//   ];
-// }, 3000);
 
 
 
 
 function handleBalloon(ff: { button: string, id: string | number, data: any }) {
   console.log("Tugma bosildi:", ff, "ID:");
-  if (ff.button == "battery") return navigateTo(`/user/battery/${ff.id}`);
-  if (ff.button == "temp") return navigateTo(`/user/tempratura/${ff.id}`);
-  if (ff.button == "high") return navigateTo(`/user/balandlik/${ff.id}`);
+  if (ff.button == "battery") return navigateTo(`/battery/${ff.id}`);
+  if (ff.button == "temp") return navigateTo(`/tempratura/${ff.id}`);
+  if (ff.button == "high") return navigateTo(`/balandlik/${ff.id}`);
 
 
 

@@ -1,15 +1,20 @@
 <template>
   <div class="text-black">
     <div class="flex items-center gap-2">
-      <font-awesome-icon @click="router.go(-1)" icon="fa-solid fa-arrow-left" class="h-6" />
+      <font-awesome-icon
+        @click="router.go(-1)"
+        icon="fa-solid fa-arrow-left"
+        class="h-6"
+      />
       Abdullayev Jasurga tegishli qurilmalar ro'yxati
     </div>
     <div class="w-full mt-4 mb-4">
-      <YandexPicker :points="devicePoints" @change="handleSelect" @action="handleBalloon" />
-
-
+      <YandexPicker
+        :points="devicePoints"
+        @change="handleSelect"
+        @action="handleBalloon"
+      />
     </div>
-
   </div>
 
   <Loading v-if="pending" />
@@ -19,11 +24,14 @@
       <UButton color="secondary" icon="i-lucide-search" size="md" variant="solid" />
     </div>
 
-
-
     <div class="flex items-center mt-3 gap-3 flex-wrap justify-center">
-      <div @dblclick="navigateTo('/info/1')" v-for="value in devices" :key="value.id" class="relative mb-4 w-full max-w-[400px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md
-          border border-white/20 flex flex-col gap-4" :class="[StatusWell(value.status)]">
+      <div
+        @dblclick="navigateTo('/info/1')"
+        v-for="value in devices"
+        :key="value.id"
+        class="relative mb-4 w-full max-w-[400px] rounded-xl px-4 py-5 shadow-lg backdrop-blur-md border border-white/20 flex flex-col gap-4"
+        :class="[StatusWell(value.status)]"
+      >
         <!-- Header -->
         <div class="flex justify-between items-start">
           <div class="text-[22px] font-bold text-white">
@@ -31,14 +39,20 @@
           </div>
 
           <div class="flex items-center gap-4 me-12">
-            <Icon class="text-white text-[20px]" :name="value.waterLevel == 'rise'
-                ? 'material-symbols:arrow-shape-up-rounded'
-                : value.waterLevel == 'fall'
+            <Icon
+              class="text-white text-[20px]"
+              :name="
+                value.waterLevel == 'rise'
+                  ? 'material-symbols:arrow-shape-up-rounded'
+                  : value.waterLevel == 'fall'
                   ? 'material-symbols:arrow-downward-rounded'
                   : value.waterLevel == 'stable'
-                    ? 'material-symbols:chips-outline'
-                    : ''
-              " width="24" height="24" />
+                  ? 'material-symbols:chips-outline'
+                  : ''
+              "
+              width="24"
+              height="24"
+            />
             <Signal :signal="value.SignalType" :value="value.signal" />
 
             <charger :is-charger="value.IsCharger" :value="value.BatteryValue" />
@@ -68,67 +82,63 @@
             <span class="font-bold">Joriy balandlik</span>
             <span>{{ value.lastheight }} MM</span>
           </div>
+
+          <div class="flex justify-between">
+            <span class="font-bold">Tashkilot</span>
+            <span>{{ value.organization }} MM</span>
+          </div>
         </div>
       </div>
-
-
-
     </div>
     <div class="mb-5 justify-center flex pb-4">
-      <UPagination v-model:page="page" :total="total" class="mb-5 mx-auto block mt-7" color="secondary"
-        active-color="secondary" />
+      <UPagination
+        v-model:page="page"
+        :total="total"
+        class="mb-5 mx-auto block mt-7"
+        color="secondary"
+        active-color="secondary"
+      />
     </div>
-
-
-
   </div>
 
-
-
-  <div class="mt-6">
-  </div>
-
-
-
-
+  <div class="mt-6"></div>
 </template>
 <script lang="ts" setup>
 import { select } from "#build/ui";
 import type { deviceType } from "~/types/types";
 const { $loadYandex } = useNuxtApp();
 definePageMeta({
-  layout: "dashboard"
+  layout: "dashboard",
 });
 
-
-
-
-const devicePoints = ref<{
-  id: string | number;
-  lat: number | string;
-  lon: number | string,
-  data?: any
-}[]>([
-  { id: 1, lat: 39.6714, lon: 67.0025, },
-  { id: 2, lat: 39.68, lon: 67.0101, },
-  { id: 3, lat: 39.66, lon: 67.02, }
+const devicePoints = ref<
+  {
+    id: string | number;
+    lat: number | string;
+    lon: number | string;
+    data?: any;
+  }[]
+>([
+  { id: 1, lat: 39.6714, lon: 67.0025 },
+  { id: 2, lat: 39.68, lon: 67.0101 },
+  { id: 3, lat: 39.66, lon: 67.02 },
 ]);
 
-
-const route = useRoute()
+const route = useRoute();
 const router = useRouter();
 
-const searchValue = ref<string>('')
-const page = ref(Number(route.query.page) || 1)
+const searchValue = ref<string>("");
+const page = ref(Number(route.query.page) || 1);
 const total = ref(30);
 
-const query = computed(() => `devices?page=${page.value}` + (searchValue.value ? `&search=${encodeURIComponent(searchValue.value)}` : ''));
+const query = computed(
+  () =>
+    `devices?page=${page.value}` +
+    (searchValue.value ? `&search=${encodeURIComponent(searchValue.value)}` : "")
+);
 const { data, pending, error, status, refresh } = useApi(query.value);
 
-console.log(pending.value)
-
-
-
+console.log(pending.value);
 
 const locations = [
   {
@@ -154,98 +164,89 @@ const locations = [
   },
 ];
 
-
-
-const items =
-  ref([
-    [
-      {
-        label: 'Tahrirlash',
-        icon: 'i-lucide-pencil',
-        onSelect() {
-          console.log('Tahrirlash bosildi')
-        }
+const items = ref([
+  [
+    {
+      label: "Tahrirlash",
+      icon: "i-lucide-pencil",
+      onSelect() {
+        console.log("Tahrirlash bosildi");
       },
-      {
-        label: "Qurilma haqida ma'lumot",
-        icon: 'i-lucide-info',
-        onSelect() {
-          console.log("Info bosildi");
-          navigateTo("/info/1")
-        }
+    },
+    {
+      label: "Qurilma haqida ma'lumot",
+      icon: "i-lucide-info",
+      onSelect() {
+        console.log("Info bosildi");
+        navigateTo("/info/1");
       },
-      {
-        label: "Balandlik haqida ma'lumot",
-        icon: 'i-lucide-info',
-        onSelect() {
-          console.log("Balandlik bosildi");
-          navigateTo("/info/1")
-        }
+    },
+    {
+      label: "Balandlik haqida ma'lumot",
+      icon: "i-lucide-info",
+      onSelect() {
+        console.log("Balandlik bosildi");
+        navigateTo("/info/1");
       },
+    },
 
-
-      {
-        label: "Temperatura haqida ma'lumot",
-        icon: 'material-symbols:thermometer',
-        onSelect() {
-          console.log("Temperatura bosildi");
-          navigateTo("/info/1")
-        }
+    {
+      label: "Temperatura haqida ma'lumot",
+      icon: "material-symbols:thermometer",
+      onSelect() {
+        console.log("Temperatura bosildi");
+        navigateTo("/info/1");
       },
-      {
-        label: "Akkulmuyator haqida ma'lumot",
-        icon: 'material-symbols:battery-alert',
-        onSelect() {
-          console.log("Akkulmuyator bosildi");
-          navigateTo("/info/1")
-        }
+    },
+    {
+      label: "Akkulmuyator haqida ma'lumot",
+      icon: "material-symbols:battery-alert",
+      onSelect() {
+        console.log("Akkulmuyator bosildi");
+        navigateTo("/info/1");
       },
-      {
-        label: "O'chirish",
-        icon: 'i-lucide-trash',
-        color: 'error',
-        onSelect() {
-          console.log("O'chirish bosildi")
-        }
-      }
-    ]
-  ])
-
-
+    },
+    {
+      label: "O'chirish",
+      icon: "i-lucide-trash",
+      color: "error",
+      onSelect() {
+        console.log("O'chirish bosildi");
+      },
+    },
+  ],
+]);
 
 const onSelect = (item: any) => {
-  console.log("Event")
-  console.log("Bosilgan item:", item)
+  console.log("Event");
+  console.log("Bosilgan item:", item);
 
-  if (item.label === 'Profile') {
-    console.log("Profile bosildi")
+  if (item.label === "Profile") {
+    console.log("Profile bosildi");
   }
 
-  if (item.label === 'Billing') {
-    console.log("Billing bosildi")
+  if (item.label === "Billing") {
+    console.log("Billing bosildi");
   }
-}
+};
 
 const StatusWell = (random: string): string => {
-  if (random == 'good') return "bg-green-600";
-  if (random == 'unknown') return "bg-red-700";
-  if (random == 'broken') return "bg-gray-600";
+  if (random == "good") return "bg-green-600";
+  if (random == "unknown") return "bg-red-700";
+  if (random == "broken") return "bg-gray-600";
   // return "bg-green-600"
 
-  return "bg-black"
-}
+  return "bg-black";
+};
 
-
-
-
-const devices = ref<deviceType[]>([])
+const devices = ref<deviceType[]>([]);
 
 // Devices data o‘zgarganda marker qo‘shish
 
 watch(data, (newVal) => {
   console.log(data.value);
   devices.value = [];
-  if (!newVal) return
+  if (!newVal) return;
 
   devices.value = [];
   devicePoints.value = [];
@@ -254,11 +255,11 @@ watch(data, (newVal) => {
     el.item = ref([
       [
         {
-          label: 'Tahrirlash',
-          icon: 'i-lucide-pencil',
+          label: "Tahrirlash",
+          icon: "i-lucide-pencil",
           onSelect() {
-            console.log('Tahrirlash bosildi', el.id)
-          }
+            console.log("Tahrirlash bosildi", el.id);
+          },
         },
         // {
         //   label: "Qurilma haqida ma'lumot",
@@ -270,97 +271,80 @@ watch(data, (newVal) => {
         // },
         {
           label: "Balandlik haqida ma'lumot",
-          icon: 'i-lucide-info',
+          icon: "i-lucide-info",
           onSelect() {
             console.log("Balandlik bosildi", el.id);
-            navigateTo(`/balandlik/${el.id}`)
-          }
+            navigateTo(`/balandlik/${el.id}`);
+          },
         },
-
 
         {
           label: "Temperatura haqida ma'lumot",
-          icon: 'material-symbols:thermometer',
+          icon: "material-symbols:thermometer",
           onSelect() {
             console.log("Temperatura bosildi", el.id);
-            navigateTo(`/tempratura/${el.id}`)
-          }
+            navigateTo(`/tempratura/${el.id}`);
+          },
         },
         {
           label: "Akkulmuyator haqida ma'lumot",
-          icon: 'material-symbols:battery-alert',
+          icon: "material-symbols:battery-alert",
           onSelect() {
             console.log("Akkulmuyator bosildi", el.id);
-            navigateTo(`/battery/${el.id}`)
-          }
+            navigateTo(`/battery/${el.id}`);
+          },
         },
         {
           label: "O'chirish",
-          icon: 'i-lucide-trash',
-          color: 'error',
+          icon: "i-lucide-trash",
+          color: "error",
           onSelect() {
-            console.log("O'chirish bosildi", el.id)
-          }
-        }
-      ]
-    ])
+            console.log("O'chirish bosildi", el.id);
+          },
+        },
+      ],
+    ]);
     devices.value.push(el);
-    devicePoints.value.push(
-      {
-        id: el.id,
-        lat: el.coords[0],
-        lon: el.coords[1],
-        data: el
-      }
-    )
-
+    devicePoints.value.push({
+      id: el.id,
+      lat: el.coords[0],
+      lon: el.coords[1],
+      data: el,
+    });
   });
-  console.log(devicePoints.value)
+  console.log(devicePoints.value);
 });
 
 watch(page, (newPage) => {
   router.replace({
-    query: { ...route.query, page: newPage.toString() }
-
+    query: { ...route.query, page: newPage.toString() },
   });
   refresh();
 });
 
-
-let searchTimeout: ReturnType<typeof setTimeout>
+let searchTimeout: ReturnType<typeof setTimeout>;
 
 watch(searchValue, (newVal) => {
-  if (searchTimeout) clearTimeout(searchTimeout)
+  if (searchTimeout) clearTimeout(searchTimeout);
 
   searchTimeout = setTimeout(() => {
-    refresh()
-  }, 3000)
+    refresh();
+  }, 3000);
 });
 
-// 
-
+//
 
 function handleSelect(coords: any) {
   console.log("Bosilgan joy:", coords);
 }
 
-
-
-
-
-function handleBalloon(ff: { button: string, id: string | number, data: any }) {
+function handleBalloon(ff: { button: string; id: string | number; data: any }) {
   console.log("Tugma bosildi:", ff, "ID:");
   if (ff.button == "battery") return navigateTo(`/battery/${ff.id}`);
   if (ff.button == "temp") return navigateTo(`/tempratura/${ff.id}`);
   if (ff.button == "high") return navigateTo(`/balandlik/${ff.id}`);
-
-
-
 }
-
 </script>
-
-
 
 <style scoped>
 div {

@@ -63,27 +63,27 @@ const menus = computed<{
 }[]>(() => [
     {
         id: "1",
-        to: '/',
+        to: '/user',
         title: "Qurilmalar ro'yxati",
         icon: 'fa-solid fa-house'
     },
     
     {
         id: "4",
-        to: '/superadmin/users',
+        to: '/user/users',
         title: "Foydalanuvchilar",
         icon: "fa-solid fa-users"
 
     },
-    // {
-    //     id: "5",
-    //     to: '/map',
-    //     title: "Qurilma foydalanuvchilari",
-    //     icon: "fa-solid fa-bridge-water"
-    // },
+    {
+        id: "5",
+        to: '/user/Volume',
+        title: "Suv hajmi",
+        icon: "fa-solid fa-glass-water"
+    },
     {
         id: "6",
-        to: '/profile',
+        to: '/user/profile',
         title: "Profil",
         icon: 'fa-solid fa-address-card'
     },
