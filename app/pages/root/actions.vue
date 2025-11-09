@@ -36,7 +36,7 @@
 import { ref } from 'vue'
 
 definePageMeta({
-    layout : "dashboard"
+    layout : "root"
 });
 
 const page = ref<number>(1);

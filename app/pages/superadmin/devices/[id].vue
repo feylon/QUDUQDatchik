@@ -1,6 +1,6 @@
 <template>
   <div class="text-black">
-   <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2">
       <font-awesome-icon @click="router.go(-1)" icon="fa-solid fa-arrow-left" class="h-6" />
       Abdullayev Jasurga tegishli qurilmalar ro'yxati
     </div>
@@ -31,6 +31,14 @@
           </div>
 
           <div class="flex items-center gap-4 me-12">
+            <Icon class="text-white text-[20px]" :name="value.waterLevel == 'rise'
+                ? 'material-symbols:arrow-shape-up-rounded'
+                : value.waterLevel == 'fall'
+                  ? 'material-symbols:arrow-downward-rounded'
+                  : value.waterLevel == 'stable'
+                    ? 'material-symbols:chips-outline'
+                    : ''
+              " width="24" height="24" />
             <Signal :signal="value.SignalType" :value="value.signal" />
 
             <charger :is-charger="value.IsCharger" :value="value.BatteryValue" />
@@ -72,7 +80,7 @@
     </div>
 
 
-  
+
   </div>
 
 
@@ -82,7 +90,7 @@
 
 
 
-  
+
 </template>
 <script lang="ts" setup>
 import { select } from "#build/ui";

@@ -64,22 +64,10 @@ const menus = computed<{
     {
         id: "1",
         to: '/',
-        title: "Qurilma",
+        title: "Qurilmalar ro'yxati",
         icon: 'fa-solid fa-house'
     },
-    // {
-    //     id: "2",
-    //     to: '/map',
-    //     title: "MSR ro'yxati",
-    //     icon: "fa-solid fa-list"
-    // },
-    {
-        id: "3",
-        to: '/superadmin/actions',
-        title: "Harakatlar tarixi",
-        icon: "fa-solid fa-list"
-
-    },
+    
     {
         id: "4",
         to: '/superadmin/users',

@@ -74,11 +74,7 @@
             <span>{{ value.lastheight }} MM</span>
           </div>
 
-          <div class="flex justify-between">
-            <span class="font-bold">Tashkilot</span>
-            <span>{{ value.organization }} MM</span>
-          </div>
-
+          
         </div>
       </div>
 
@@ -111,7 +107,7 @@ import { select } from "#build/ui";
 import type { deviceType } from "~/types/types";
 const { $loadYandex } = useNuxtApp();
 definePageMeta({
-  layout: "dashboard"
+  layout: "userdashboard"
 });
 
 

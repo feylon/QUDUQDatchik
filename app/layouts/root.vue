@@ -63,39 +63,20 @@ const menus = computed<{
 }[]>(() => [
     {
         id: "1",
-        to: '/',
-        title: "Qurilma",
-        icon: 'fa-solid fa-house'
+        to: '/root/admins',
+        title: "Adminlar",
+        icon: 'fa-solid fa-users-gear'
     },
-    // {
-    //     id: "2",
-    //     to: '/map',
-    //     title: "MSR ro'yxati",
-    //     icon: "fa-solid fa-list"
-    // },
     {
-        id: "3",
-        to: '/superadmin/actions',
+        id: "2",
+        to: '/root/actions',
         title: "Harakatlar tarixi",
-        icon: "fa-solid fa-list"
-
+        icon: 'fa-solid fa-address-card'
     },
-    {
-        id: "4",
-        to: '/superadmin/users',
-        title: "Foydalanuvchilar",
-        icon: "fa-solid fa-users"
-
-    },
-    // {
-    //     id: "5",
-    //     to: '/map',
-    //     title: "Qurilma foydalanuvchilari",
-    //     icon: "fa-solid fa-bridge-water"
-    // },
+   
     {
         id: "6",
-        to: '/profile',
+        to: '/root/profile',
         title: "Profil",
         icon: 'fa-solid fa-address-card'
     },

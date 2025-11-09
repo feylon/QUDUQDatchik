@@ -14,7 +14,7 @@
 
     </div>
 
-    <form @submit.prevent="AddDevice()" class="h-[200px] w-full max-w-[1000px] mt-5 mx-auto">
+    <form @submit.prevent="ChangeUser()" class="h-[200px] w-full max-w-[1000px] mt-5 mx-auto">
         <UCard>
 
             <div class="grid gap-8 md:grid-cols-2 grid-cols-1">
@@ -52,7 +52,7 @@
                 </div>
 
                 <div></div>
-                <div class="col-span-2 font-semibold">
+                <div class="col-span-2 font-bold">
                     Foydalanuvchiga bog'langan foydalanuvchilar ro'yxati
                 </div>
                 <div v-for="item in formData.users" class="flex max-w-[350px] gap-4 items-center justify-between mt-4">
@@ -180,13 +180,14 @@ const admin = ref<{
 const errors = reactive<{ [k: string]: string | null }>({})
 
 
-const AddDevice = async () => {
+const ChangeUser = async () => {
     toast.add({
-        title: "Qurilma qo'shildi",
+        title: "User ma'lumotlari o'zgardi",
         duration: 5000,
         color: "primary"
 
-    })
+    });
+    router.go(-1)
 }
 
 const items = ref<SelectMenuItem[]>([

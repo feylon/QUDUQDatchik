@@ -177,7 +177,7 @@ const admin = ref<{
   lastname: "",
   login : "",
   password : ""
-})
+});
 
 
 const errors = reactive<{ [k: string]: string | null }>({})

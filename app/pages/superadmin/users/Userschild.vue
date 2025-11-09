@@ -189,27 +189,21 @@ const users: {
 
 const parent = ref([
   {
-    label: 'Mamadaliev Akmal Odilovich',
-    
-    to: '/superadmin/users/'
-  },
-    {
-    label: 'Mamadaliev Akmal Odilovich',
-    
+    label: 'Qodirov Laziz Olimovich',
     to: '/superadmin/users/'
   },
   {
-    label: 'Mamadaliev Akmal Odilovich',
-    
+    label: 'Ergashev Jamshid Ravshanovich',
     to: '/superadmin/users/'
   },
-    {
-    label: 'Mamadaliev Akmal Odilovich',
-    
+  {
+    label: 'Abdullayev Sardor Islomovich',
     to: '/superadmin/users/'
   },
-
-  
-  
-])
+  {
+    label: 'Toshpulatov Nodirbek Shavkatovich',
+    to: '/superadmin/users/'
+  }
+]
+)
 </script>

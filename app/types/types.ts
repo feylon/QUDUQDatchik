@@ -10,6 +10,8 @@ export interface deviceType {
   lastheight: number;
   status : 'good' | 'unknown' | 'broken'
   coords: []; //Shu sonlarga yaqin bo'lsin : [41.3251, 69.2402]
+  waterLevel? :'rise'| 'fall' | 'stable'
+  organization? : string | undefined 
 
 
   item : any
